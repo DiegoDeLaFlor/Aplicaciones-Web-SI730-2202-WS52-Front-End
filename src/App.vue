@@ -8,6 +8,9 @@ import TheWelcome from './components/TheWelcome.vue'
   <label for="code">Codigo</label>
   <InputNumber id="code"/>
   <Button label="validar"></Button>
+    <br>
+    <label for="code">Nombre*</label>
+    <InputText id="nombre"/>
   </form>
 </template>
 
