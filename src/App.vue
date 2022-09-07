@@ -5,8 +5,9 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
   <form>
-
-  <Button label="Grabar"></Button>
+  <label for="code">Codigo</label>
+  <InputNumber id="code"/>
+  <Button label="validar"></Button>
   </form>
 </template>
 
