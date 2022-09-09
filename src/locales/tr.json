@@ -1,0 +1,7 @@
+{
+  "code": "Kod",
+  "name": "Ad",
+  "phone": "Telefon",
+  "greeting": "Hola en Turco, {name}",
+  "product": "ningún producto en turco | un producto en turco | productos en turco"
+}
