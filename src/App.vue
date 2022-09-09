@@ -117,8 +117,8 @@ export default {
       </div>
 
       <div class="field grid">
-            <label for="address" class="col-fixed" style="width:150px">Descripcion</label>
-            <textarea id="address" type="text" rows="4" style="width:250px"></textarea>
+        <label for="address" class="col-fixed" style="width:150px">Descripcion</label>
+        <textarea id="address" type="text" rows="4" style="width:250px"></textarea>
       </div>
     </div>
 
