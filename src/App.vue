@@ -1,15 +1,56 @@
 <script>
+import { ComentsService } from "@/services/coments-service";
+
 export default {
   data() {
     return {
+      value:"",
+      commets: [],
+      body: "",
+      postId: "",
+      commentId: "",
       categories: [
-        {name: 'Lacteos', code: 'LA'},
-        {name: 'Verduras', code: 'VE'},
-        {name: 'Frutas', code: 'FR'},
-      ]
-    }
+        {name: "Lacteos", code: "LA"},
+        {name: "Verduras", code: "VE"},
+        {name: "Frutas", code: "FR"},
+      ],
+    };
+  },
+  //ciclo de vida en un componentes(funciones)
+  created() {
+    new ComentsService().getComments()
+      .then(response =>{
+        console.log("invocado API")
+        console.log(response.status)
+        console.log(response.data)
+        this.commets = response.data;
+    })
+  },
+  methods:{
+    createComment: function(){
+      new ComentsService().postComment(this.body, this.postId)
+        .then(response=>{
+          console.log("postComment",response)
+      })
+    },
+    deleteComment : function(){
+      new ComentsService().deleteComment(this.commentId)
+        .then(response=>{
+          console.log("postComment",response)
+        })
+        .catch(error =>{
+          console.log("postComment",error)
+        })
+    },
+    putComment: function(){
+      new ComentsService().putComment(this.commentId, this.body, this.postId)
+        .then(response=>{
+          console.log("putComment",response)
+        })
+    },
   }
-}
+};
+
 </script>
 
 <template>
@@ -53,6 +94,47 @@ export default {
           ></pv-dropdown>
         </div>
       </div>
+
+      <div class="field grid">
+        <label for="category" class="col-fixed" style="width:150px">Comentarios</label>
+        <div class="col">
+          <pv-dropdown
+            id = "commet"
+            :options="commets"
+            optionaLabel="body"
+            placeholder="Select a commet"
+            class="w-full"
+          ></pv-dropdown>
+
+        </div>
+      </div>
+
+      <div class="field grid">
+        <label for="body" class="col-fixed" style="width:150px" >Cuerpo</label>
+        <div class="col">
+          <InputText id="body" v-model="body"/>
+        </div>
+      </div>
+
+      <div class="field grid">
+        <label for="postId" class="col-fixed" style="width:150px" >PostId</label>
+        <div class="col">
+          <InputText id="postId" v-model="postId"/>
+        </div>
+      </div>
+
+      <div class="field grid">
+        <label for="commentId" class="col-fixed" style="width:150px" >Id a Eliminar</label>
+        <div class="col">
+          <InputText id="commentId" v-model="commentId"/>
+        </div>
+      </div>
+
+      <Button @click="createComment">Crear Post</Button>
+
+      <Button @click="deleteComment">Eliminar Post</Button>
+
+      <Button @click="putComment">Modificar Post</Button>
 
       <h2>
         {{ $tc("product",1)}}
@@ -125,6 +207,4 @@ export default {
   </form>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
